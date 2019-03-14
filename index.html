@@ -3,7 +3,7 @@
 <head>
 	<title>Социальные сети</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="js/enter.js"></script>
 </head>
 <body>
 	<!-- Хедер !-->
@@ -11,12 +11,12 @@
 		<span>Социальные сети</sppan>
 	</div>
 	<!-- Форма регистрации в сервис !-->
-	<form id="login">
-		<input type="text" class="input">
+	<form id="loginUser">
+		<input id="login" type="text" class="input">
 		<p></p>
-		<input type="text" class="input">
+		<input id="password" type="text" class="input">
 		<p></p>
-		<input type="submit" value="Вход" class="button">
+		<input type="submit" value="Вход" class="button" onclick="enterUser()">
 		<input type="submit" value="Регистрация" class="button">
 	</form>
 </body>
