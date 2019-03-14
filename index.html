@@ -2,8 +2,12 @@
 <html>
 <head>
 	<title>Социальные сети</title>
+	<!-- Подклчение таблицы стилей !-->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- Js код для входа/регистрации в сервисе !-->
 	<script src="js/enter.js"></script>
+	<!-- Скрипт шифрования алгоритмом MD5 !-->
+	<script src="js/md5.js"></script>
 </head>
 <body>
 	<!-- Хедер !-->
@@ -12,9 +16,11 @@
 	</div>
 	<!-- Форма регистрации в сервис !-->
 	<form id="loginUser">
+		<!-- Поле ввода логина !-->
 		<input id="login" type="text" class="input">
 		<p></p>
-		<input id="password" type="text" class="input">
+		<!-- Поле ввода пароля !-->
+		<input id="password" type="password" class="input">
 		<p></p>
 		<input type="submit" value="Вход" class="button" onclick="enterUser()">
 		<input type="submit" value="Регистрация" class="button">
