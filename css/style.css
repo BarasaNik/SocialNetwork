@@ -38,3 +38,13 @@ body{
 	color: #FFF;
 	margin-left: 55px;
 }
+
+/*Приветствие*/
+.hello{
+	margin-left: 15%;
+	margin-top: 15%;
+}
+
+.hello span{
+	font-size: 45px;
+}
