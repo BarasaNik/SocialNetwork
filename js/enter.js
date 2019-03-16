@@ -4,7 +4,9 @@ function enterUser(){
 	//считываем пароль
 	var password=document.getElementById("password").value
 	//проверяем правильность введенных данных
-	if (login=='admin' && MD5(password)==MD5('admin'))
+	if (login=='admin' && MD5(password)==MD5('admin')){
 		alert('Успешный вход');
+		window.open('main.html','_self');
+	}
 	else alert('Неверный логин или пароль');
 }
