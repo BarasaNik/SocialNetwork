@@ -1,0 +1,28 @@
+
+.loginTwitter{
+	margin-left: 35%;
+	margin-top: 1%;
+}
+
+/*Кнопка входа*/
+.loginTwitter .login .button{
+	font-size: 14px;
+	border: 1px solid #1da1f2;
+	color: #1da1f2;
+	background-color: #fff;
+	border-top-left-radius: 100px;
+	border-top-right-radius: 100px;
+	border-bottom-left-radius: 100px;
+	border-bottom-right-radius: 100px;
+	padding: 10px;
+}
+
+.loginTwitter .login .button:hover{
+	background-color: #e6ecf0;
+}
+
+/*Элементы для входа в твиттер*/
+.loginTwitter .login .input{	
+	font-size: 14px;
+	padding: 10px;	
+}
