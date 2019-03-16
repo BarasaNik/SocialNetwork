@@ -6,7 +6,7 @@ function enterUser(){
 	//проверяем правильность введенных данных
 	if (login=='admin' && MD5(password)==MD5('admin')){
 		alert('Успешный вход');
-		window.open('main.html','_self');
+		window.open('main.html');
 	}
 	else alert('Неверный логин или пароль');
 }
