@@ -12,10 +12,7 @@
 
 .auth-window {
     background-color: white;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 30px;
-    padding-bottom: 50px;
+    padding: 30px 30px 50px 30px;
     border-radius: 10px;
     border: 1px solid white;
     margin-top: 100px;
@@ -58,10 +55,7 @@
 
 .enter-button {
     align-content: center;
-    padding-right: 105px;
-    padding-left: 105px;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding:  7px 105px 7px 105px;
     background-color: #ff8c00;
     border-radius: 20px;
     border: 1px solid white;
@@ -75,10 +69,7 @@
 
 .registration-button{
     align-content: center;
-    padding-right: 85px;
-    padding-left: 85px;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding: 7px 85px 7px 85px;
     background-color: #e8e8e8;
     border-radius: 20px;
     border: 1px solid white;
