@@ -2,19 +2,21 @@ body{
 	margin: 0;
 }
 
-/* Стили для хедера страницы */
-.header{
-	width: 100%;
-	padding-top: 25px;
-	height: 80px;
+/* Стили для хедера страницы*/
+
+.header {
 	background-color: #464646;
+	color: white;
+	height: 100px;
+	font-size: 30px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
 }
 
 .header span{
-	font-size: 32px;
-	padding-left: 100px;
+	font-size: 52px;
 	color: #FFF;
-	margin-top: 100px;
 }
 
 /* Форма регистрации и входа */
