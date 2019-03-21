@@ -11,6 +11,8 @@
 	<link rel="shortcut icon" href="images/icontwitter.png" type="image/x-icon">
 	<!-- Скрипт шифрования алгоритмом MD5 !-->
 	<script src="js/md5.js"></script>
+	<!-- Скрипт для авторизации в twitter !-->
+	<script type="text/javascript" src="js/logintwitter.js"></script>
 	<!-- Кодировка страниц !-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
@@ -47,7 +49,7 @@
 				<div class="login">
 					<input type="text" class="twitterInput" placeholder="Телефон, адрес электронной почты">
 					<input type="password" class="twitterInput" placeholder="Пароль">
-					<input type="submit" value="Войти" class="logbutton">
+					<input type="submit" value="Войти" class="logbutton" onclick="logintwitter()">
 				</div>
 				<br/>
 				<div class="registration">
