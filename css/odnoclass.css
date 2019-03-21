@@ -57,11 +57,16 @@
 .enter-button {
     align-content: center;
     padding:  7px 105px 7px 105px;
-    background-color: #ff8c00;
+    background-color: #F67219;
     border-radius: 20px;
-    border: 1px solid white;
+    border: 2px solid white;
     color: white;
     outline: none
+}
+
+.enter-button:hover {
+    background: #E37023 ;
+    border: 2px solid #E37023;
 }
 
 .image-no-profil{
@@ -74,7 +79,12 @@
     padding: 7px 85px 7px 85px;
     background-color: #e8e8e8;
     border-radius: 20px;
-    border: 1px solid white;
+    border: 2px solid white;
     color: #636363;
     outline: none
+}
+
+.registration-button:hover {
+    background: #DFDCDB ;
+    border: 2px solid #DFDCDB;
 }
