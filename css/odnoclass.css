@@ -46,6 +46,7 @@
     border: 1px solid grey;
     margin-top: 10px;
     font-size: 20px;
+    outline: none
 }
 
 .auth-sumbit-block {
@@ -60,6 +61,7 @@
     border-radius: 20px;
     border: 1px solid white;
     color: white;
+    outline: none
 }
 
 .image-no-profil{
@@ -74,4 +76,5 @@
     border-radius: 20px;
     border: 1px solid white;
     color: #636363;
+    outline: none
 }

@@ -58,3 +58,13 @@ body{
 .hello span{
 	font-size: 45px;
 }
+
+/* Цвет ссылки по умолчанию*/
+a{
+	color: white;
+}
+
+/* Подсвечивание ссылки "одноклассники" в header */
+.aiming-odnoclass-link a:hover {
+	color:#ff8c00;
+}
