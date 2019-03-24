@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Facebook</title>
+	<!-- Подклчение таблицы стилей !-->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/facebook.css">
+	<!-- Подключение стилей обнуляющих во всех браузерах стандартные настройки !-->
+	<link rel="stylesheet" type="text/css" href="css/nullStyle.css">
+	<!-- Иконка на вкладке !-->
+	<link rel="shortcut icon" href="images/facebook.png" type="image/x-icon">
+	<!-- Скрипт шифрования алгоритмом MD5 !-->
+	<script src="js/md5.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato|Playfair+Display" rel="stylesheet">
+	
+	<!-- Кодировка страниц !-->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+	<!-- Хедер !-->
+	<div class="header">
+		<span>Социальные сети</span>
+		<a href="#" class="social">Вконтакте</a>
+		<a href="#" class="social">Instagram</a>
+		<div class ="social aiming-odnoclass-link"> <a href="autorOdnoclass.html">Одноклассники</a> </div>
+		<a href="facebook.html" class="social">Facebook</a>
+		<a href="twitter.html" class="social">Twitter</a>
+		<a href="index.html" class="social">Выход</a>
+	</div>
+	<div class="header1">
+		<div class="logo">Facebook</div>
+		<div class="header1-login">
+					<input type="text" class="login" placeholder="Телефон, адрес электронной почты">
+					<input type="password" class="login" placeholder="Пароль">
+					<input type="submit" value="Вход" class="logbutton" onclick="loginfacebook()">
+		</div>
+	</div>
+	<div class= "section">
+		<div class="item">
+			<div class="text">Facebook помогает вам всегда оставаться на связи и общаться со своими знакомыми.</div>
+			<img src="images/world.png" alt="Image" >
+		</div>
+		<div class="item">
+			<h1>Регистрация</h1>
+			<h3>Это бесплатно и всегда будет бесплатнo.</h3>
+			<div>
+				<input type="text" class="login" placeholder="Имя">
+				<input type="password" class="login" placeholder="Фамилия">
+				<input type="text" class="login1" placeholder="Телефон, адрес электронной почты"><br>
+				<input type="password" class="login1" placeholder="Пароль">
+			</div>
+			<div class=elm><h3>Дата рождения</h3></div>
+			<div class=elm><input type="date" name="calendar" value="2019-03-24" max="2019-12-31" min="1940-01-01"></div>
+		    <div class=elm>
+		    	<div class="radio">
+			    	<input type="radio" name="sex" checked><h3>Женщина</h3>
+			    </div>
+			    <div class="radio">
+			    	<input type="radio" name="sex" checked><h3>Мужчина</h3>
+			    </div>
+		    </div>
+		   <div class=elm> <input type="submit" value="Регистрация" class="logbutton1" onclick="checkinfacebook()"></div>
+		</div>
+	</div>
+</body>
+</html>
