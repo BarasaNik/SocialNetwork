@@ -8,16 +8,21 @@
 }
 .leftside{
     width: 60%;	
-	height: 580px;	
-	background: url("../images/vkdog.jpg") 100% 100% no-repeat;
-    background-size: cover;
-    margin-right: 5%;
+    height: 580px;	
+    position:relative;
+    min-width: 1000px;
+}
+.center{
+    margin-top: 10%;
+    margin-left: 25%;
+    position:relative;
 }
 .rightside{
     width: 40%;
     justify-content: center;
 }
 .log-window {
+    font-family: 'Roboto', sans-serif;
     width: 50%;
     background-color: white;
     padding: 30px 10px 50px 30px;
@@ -36,7 +41,7 @@
     display: block;
     padding: 5px;
     border-radius: 3px;
-    border: 1px solid grey;
+    border: 1px solid #DCDCDC;
     margin-top: 10px;
     font-size: 15px;
     outline: none
@@ -52,29 +57,33 @@
     outline: none
 }
 .registration-window {
+    font-family: 'Roboto', sans-serif;
     width: 50%;
     background-color: white;
     padding: 30px 10px 50px 30px;
     border-radius: 3px;
     border: 1px solid white;
     margin-top: 50px;
-    margin-right: 10%
+    margin-right: 10%;
+    text-align: center;
 }
 .string-bold{
-    font-size: 24px;
+    font-size: 20px;
 	color: black;
     font-weight:  bold;
-    position: center;
 }
 .string-moment-reg{
-    font-size: 15px;
+    font-size: 13px;
 	color: grey;
-	position: center;
+    position: center;
+    margin-top: 1%;
+    margin-bottom: 5%;
 }
 .string-date{
-    font-size: 18px;
+    font-size: 15px;
     color: grey;
     font-weight:  bold;
+    text-align: left;
 }
 .flex-container{
     display: flex;
