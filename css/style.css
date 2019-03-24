@@ -68,3 +68,8 @@ a{
 .aiming-odnoclass-link a:hover {
 	color:#ff8c00;
 }
+
+/* Подсвечивание ссылки "одноклассники" в header */
+.aiming-vk-link a:hover {
+	color:#5c7cb6;
+}
