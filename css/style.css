@@ -73,6 +73,13 @@ a{
 /* Подсвечивание ссылки "одноклассники" в header */
 .aiming-vk-link a:hover {
 	color:#5c7cb6;
+}
+
+.aiming-twitter-link a:hover{
+	color: #006dbf;
+}
+
 .text{
 	color:#2851A3;
 }
+
