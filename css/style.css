@@ -78,7 +78,9 @@ a{
 .aiming-twitter-link a:hover{
 	color: #006dbf;
 }
-
+.aiming-facebook-link a:hover{
+	color: #3b5998;
+}
 .text{
 	color:#2851A3;
 }
