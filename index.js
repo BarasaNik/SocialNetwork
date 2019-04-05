@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-  
 const app = express();
 app.use(express.static(__dirname + '/public'));
 // создаем парсер для данных application/x-www-form-urlencoded
@@ -27,6 +26,12 @@ app.get("/", function(request, response){
     response.sendFile(__dirname + "/index.html");
 });
 
+//ссылки на другие страницы
 require('./main.js')(app);
-  
+require('./twitter.js')(app);
+require('./facebook.js')(app);  
+require('./odnoclassniki.js')(app);  
+require('./instagram.js')(app);  
+require('./vk.js')(app);  
+
 app.listen(3000);
