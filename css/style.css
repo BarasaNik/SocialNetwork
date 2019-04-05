@@ -81,6 +81,11 @@ a{
 .aiming-facebook-link a:hover{
 	color: #3b5998;
 }
+
+.aiming-instagram-link a:hover {
+    color: #3f729b;
+}
+
 .text{
 	color:#2851A3;
 }
