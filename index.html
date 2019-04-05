@@ -6,10 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<!-- Подключение стилей обнуляющих во всех браузерах стандартные настройки !-->
 	<link rel="stylesheet" type="text/css" href="css/nullStyle.css">
-	<!-- Js код для входа/регистрации в сервисе !-->
-	<script src="js/enter.js"></script>
-	<!-- Скрипт шифрования алгоритмом MD5 !-->
-	<script src="js/md5.js"></script>
 	<!-- Кодировка страниц !-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
@@ -19,16 +15,16 @@
 		<span>Социальные сети</sppan>
 	</div>
 	<!-- Форма регистрации в сервис !-->
-	<form id="loginUser">
+	<form action="/enter" method="post" id="loginUser">
 		<p>Регистрация/Авторизация</p>
 		<!-- Поле ввода логина !-->
-		<input id="login" type="text" class="input" placeholder="Логин">
+		<input name="login" type="text" placeholder="Логин">
 		<p></p>
 		<!-- Поле ввода пароля !-->
-		<input id="password" type="password" class="input" placeholder="Пароль">
+		<input name="password" type="password" placeholder="Пароль">
 		<p></p>
-		<input type="submit" value="Вход" class="button" onclick="enterUser()">
-		<input type="submit" value="Регистрация" class="button">
+		<input type="submit" value="Вход" class="button">
+		<!--<input type="submit" value="Регистрация" class="button">!-->
 	</form>
 </body>
 </html>
