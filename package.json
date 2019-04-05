@@ -1,0 +1,28 @@
+{
+  "name": "socialnetworksbyalex",
+  "version": "1.0.0",
+  "description": "socialnetworks",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexandrRomanychev/SocialNetwork.git"
+  },
+  "keywords": [
+    "social",
+    "network",
+    "heroku"
+  ],
+  "author": "dreamteam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexandrRomanychev/SocialNetwork/issues"
+  },
+  "homepage": "https://github.com/AlexandrRomanychev/SocialNetwork#readme"
+}
