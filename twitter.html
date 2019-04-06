@@ -9,8 +9,6 @@
 	<link rel="stylesheet" type="text/css" href="css/nullStyle.css">
 	<!-- Иконка на вкладке !-->
 	<link rel="shortcut icon" href="images/icontwitter.png" type="image/x-icon">
-	<!-- Скрипт для авторизации в twitter !-->
-	<script type="text/javascript" src="js/logintwitter.js"></script>
 	<!-- Кодировка страниц !-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
@@ -43,13 +41,13 @@
 			</div>
 		</div>
 		<div class="rightside">
-			<form id="loginTwitter" class="loginTwitter">
-				<div class="login">
-					<input type="text" class="twitterInput" placeholder="Телефон, адрес электронной почты">
-					<input type="password" class="twitterInput" placeholder="Пароль">
-					<input type="submit" value="Войти" class="logbutton" onclick="logintwitter()">
-				</div>
-				<br/>
+			<form id="loginTwitter" class="loginTwitter" action="/twitter" method="post">
+				<input name="login" type="text" class="login twitterInput" placeholder="Телефон, адрес электронной почты">
+				<input name="password" type="password" class="login twitterInput" placeholder="Пароль">
+				<input type="submit" value="Войти" class="logbutton">
+			</form>
+			<br/>
+			<form id="loginTwitter" class="loginTwitter" action="/twitterReg" method="post">
 				<div class="registration">
 					<br/><br/>
 					<img src="images/twitter.png" width="50px" height="50px">

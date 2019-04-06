@@ -44,7 +44,7 @@
 }
 
 /*Кнопка входа*/
-.loginTwitter .login .logbutton{
+.loginTwitter .logbutton{
 	font-size: 14px;
 	border: 1px solid #1da1f2;
 	color: #1da1f2;
@@ -56,7 +56,7 @@
 	padding: 10px;
 }
 
-.loginTwitter .login .logbutton:hover{
+.loginTwitter .logbutton:hover{
 	background-color: #e6ecf0;
 }
 
