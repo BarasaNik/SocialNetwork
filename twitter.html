@@ -43,11 +43,11 @@
 			</div>
 		</div>
 		<div class="rightside">
-			<form id="loginTwitter" class="loginTwitter">
+			<form id="loginTwitter" class="loginTwitter" action="/twitter" method="post">
 				<div class="login">
-					<input type="text" class="twitterInput" placeholder="Телефон, адрес электронной почты">
-					<input type="password" class="twitterInput" placeholder="Пароль">
-					<input type="submit" value="Войти" class="logbutton" onclick="logintwitter()">
+					<input name="login" type="text" class="twitterInput" placeholder="Телефон, адрес электронной почты">
+					<input name="password" type="password" class="twitterInput" placeholder="Пароль">
+					<input type="submit" value="Войти" class="logbutton">
 				</div>
 				<br/>
 				<div class="registration">
