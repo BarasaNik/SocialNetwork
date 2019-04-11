@@ -1,6 +1,9 @@
+const { SHA3 } = require('sha3');
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const hash1 = new SHA3(512);
+const hash2 = new SHA3(512);
 app.use(express.static(__dirname + '/public'));
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = bodyParser.urlencoded({extended: false});
@@ -12,14 +15,20 @@ app.post("/enter", urlencodedParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
     console.log(request.body);
 	//проверяем правильность введенных данных
-	if (`${request.body.login}`=='admin' && `${request.body.password}`=='admin'){
-		console.log('Успех');
+	//высчитываем хэш введенного пароля
+	hash1.update(`${request.body.password}`);
+	console.log(hash1.digest('hex'));
+	//сравниваем хэш с хэшом пароля admin
+	if (`${request.body.login}`=='admin' && hash1.digest('hex')==hash2.update('admin').digest('hex')){
+		console.log('Успешно');
 		response.redirect("/main");
 	}
 	else {
 		console.log('Упс');
 		response.sendFile(__dirname + "/index.html");
 	}
+	hash1.reset();
+	hash2.reset();
 });
   
 app.get("/", function(request, response){
