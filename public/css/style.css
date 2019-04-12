@@ -86,6 +86,10 @@ a{
     color: #3f729b;
 }
 
+.aiming-github-link a:hover{
+	color:rgb(23,23,23);
+}
+
 .text{
 	color:#2851A3;
 }

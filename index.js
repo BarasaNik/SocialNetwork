@@ -37,6 +37,7 @@ app.get("/", function(request, response){
 
 //ссылки на другие страницы
 require('./main.js')(app);
+require('./github.js')(app);
 require('./facebook.js')(app);  
 require('./odnoclassniki.js')(app);  
 require('./instagram.js')(app);  
