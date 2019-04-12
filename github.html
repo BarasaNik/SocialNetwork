@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub</title>
+    <!-- Подклчение таблицы стилей !-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Подключение стилей обнуляющих во всех браузерах стандартные настройки !-->
+    <link rel="stylesheet" type="text/css" href="css/nullStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/github.css">
+    <!-- Кодировка страниц !-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+    <!-- Хедер !-->
+    <div class="header">
+        <span>Социальные сети</span>
+        <div class="social aiming-vk-link" ><a href="/vk">Вконтакте</a></div>      
+        <div class="social aiming-instagram-link"><a href="/instagram">Instagram</a></div>
+        <div class ="social aiming-odnoclass-link"> <a href="/odnoclassniki">Одноклассники</a> </div>
+        <div class="social aiming-facebook-link"><a href="/facebook">Facebook</a></div>
+        <div class="social aiming-github-link"><a href="/github">GitHub</a></div>
+        <a href="/enter" class="social">Выход</a>
+    </div>
+    <div class="content">
+        <form action="/github" method="post">
+            <img src="images/github.png">
+            <h2>Sign in to GitHub</h2>
+            <div class="loginform">
+                <h4>Username or email address</h4>
+                <input type="text" name="login" class="login">
+                <h4>Password</h4>
+                <input type="password" name="password" class="password">
+                <p></p>
+                <input type="submit" name="submit" value="Sign in" class="button">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

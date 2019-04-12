@@ -1,0 +1,43 @@
+.content{
+	margin-left: 43%;
+	margin-top: 6%;
+}
+
+h1{
+	font-size:24px
+}
+
+.loginform{
+	border: 1px solid #d8dee2;
+	width: 270px;
+	margin-left: -6%;
+	padding-left: 25px;
+	padding-bottom: 20px;
+}
+
+.login, .password, .button{
+	width: 90%;
+	height: 25px;
+}
+
+.button{
+	background-color: #34d058;
+	border-color: #34d058;
+	height: 30px;
+	width: 90%;
+	color:#fff;
+}
+
+.button:hover{
+	height: 30px;
+	width: 90%;
+	color:#fff;
+	background-color: #28a745;
+	border-color: #28a745;
+}
+
+.content img{
+	width: 60px;
+	height: 60px;
+	margin-left: 6%;
+}
