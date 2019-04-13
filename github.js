@@ -23,7 +23,7 @@ module.exports = function(app){
 	    	success: function(data){
 	    		console.log("Успех");
 	    		console.log(data);
-	    		response.sendFile(__dirname+"/githubLogIn.html");
+	    		response.redirect("/githubLogIn");
 	    	},
 	    	error: function(error){
 	    		//обработка неверного ввода
@@ -32,5 +32,9 @@ module.exports = function(app){
 	    		response.sendFile(__dirname+"/github.html");
 	    	}
 	    });
+	});
+
+	app.get("/githubLogIn",function(request,response){
+		response.sendFile(__dirname+"/githubLogIn.html");
 	});
 }
