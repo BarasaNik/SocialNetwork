@@ -41,3 +41,25 @@ h1{
 	height: 60px;
 	margin-left: 6%;
 }
+
+.content .secondHeader{
+	margin-left: -70%;
+	margin-top: -4%;
+	font-size: 26px;
+}
+
+.content .secondHeader a{
+	color: #000;	
+	margin-left: 7%;
+}
+
+.content .secondHeader img{
+	margin-left: 0%;
+	margin-top: -1%;
+	position: absolute;
+}
+
+.hello{
+	margin-left: -15%;
+	margin-top: 25%;
+}
