@@ -38,7 +38,7 @@ module.exports = function(app){
 	    	success: function(data){
 	    		console.log("Успех");
 	    		console.log(data);
-	    		response.redirect("/githubLogIn");
+	    		response.redirect("/githubLogIn?name="+data.login+"&icon="+data.avatar_url);
 	    	},
 	    	error: function(error){
 	    		//обработка неверного ввода
@@ -49,6 +49,14 @@ module.exports = function(app){
 	});
 
 	app.get("/githubLogIn",function(request,response){
-		response.sendFile(__dirname+"/githubLogIn.html");
+		fs.readFile('githubLogIn.html', 'utf8', function(err, html){
+			if (!err){
+			var dom = parser.parseFromString(html).rawHTML;
+			var changeName=dom.replace('<span id="username">','<span id="username">'+request.query.name);
+			var changeIcon=changeName.replace('img src=""','img src="'+request.query.icon+'"');
+			//вывод сообщения о неверном логине/пароле
+			response.send(changeIcon);
+			}
+		});
 	});
 }
