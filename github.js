@@ -1,12 +1,13 @@
 module.exports = function(app){
-	var jsdom = require('jsdom');
-	var btoa = require('btoa');
-	var fs = require('fs');
-	var DomParser = require('dom-parser');
-	var parser = new DomParser();
+	var jsdom = require('jsdom'),
+		btoa = require('btoa'),
+		fs = require('fs'),
+		DomParser = require('dom-parser'),
+		parser = new DomParser();
 	$ = require('jquery')(new jsdom.JSDOM().window);
 	const bodyParser = require("body-parser");
 	const urlencodedParser = bodyParser.urlencoded({extended: false});
+	
 	app.get("/github",function(request,response){
 		if(request.query.mes==undefined) 
 			response.sendFile(__dirname+"/github.html");
@@ -14,8 +15,9 @@ module.exports = function(app){
 			console.log(request.query.mes);
 			fs.readFile('github.html', 'utf8', function(err, html){
 			  if (!err){
-			    var dom = parser.parseFromString(html);
-			    console.log(dom.getElementById('loginform').innerHTML);
+			    var dom = parser.parseFromString(html).rawHTML;
+			    //вывод сообщения о неверном логине/пароле
+			    response.send(dom.replace('<p></p>','<p></p>\n\t<div class=\"error\">Неверный логин/пароль</div>\n</body>\n</html>'));
 			  }
 			});
 		}
