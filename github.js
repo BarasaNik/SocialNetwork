@@ -7,12 +7,15 @@ module.exports = function(app){
 	$ = require('jquery')(new jsdom.JSDOM().window);
 	const bodyParser = require("body-parser");
 	const urlencodedParser = bodyParser.urlencoded({extended: false});
-	
+	var UserData=null;
+	var errorLog=false;
+	/*
+	* Для главной страницы GitHub
+	*/
 	app.get("/github",function(request,response){
-		if(request.query.mes==undefined) 
+		if(errorLog==false) 
 			response.sendFile(__dirname+"/github.html");
 		else{
-			console.log(request.query.mes);
 			fs.readFile('github.html', 'utf8', function(err, html){
 			  if (!err){
 			    var dom = parser.parseFromString(html).rawHTML;
@@ -23,6 +26,9 @@ module.exports = function(app){
 		}
 	});
 
+	/*
+	* Для главной страницы GitHub
+	*/
 	app.post("/github", urlencodedParser, function (request, response) {
 	    if(!request.body) return response.sendStatus(400);
 	    console.log(request.body);
@@ -36,20 +42,41 @@ module.exports = function(app){
 	    	},
 	    	proccessData: false,
 	    	success: function(data){
+	    		UserData=data;
 	    		console.log("Успех");
 	    		console.log(data);
-	    		response.redirect("/githubLogIn?name="+data.login+"&icon="+data.avatar_url);
+	    		response.redirect("/githubLogIn");
 	    	},
 	    	error: function(error){
 	    		//обработка неверного ввода
 	    		console.log(error);
-	    		response.redirect("/github?mes='Неверный логин/пароль'");
+	    		errorLog=true;
+	    		response.redirect("/github");
 	    	}
 	    });
 	});
 
+	/*
+	* Для страницы авторизации GitHub
+	*/
 	app.get("/githubLogIn",function(request,response){
 		fs.readFile('githubLogIn.html', 'utf8', function(err, html){
+			if (!err){
+			var dom = parser.parseFromString(html).rawHTML;
+			var changeName=dom.replace('<span id="username">','<span id="username">'+UserData.login);
+			var changeIcon=changeName.replace('img src=""','img src="'+UserData.avatar_url+'"');
+			//вывод сообщения о неверном логине/пароле
+			response.send(changeIcon);
+			}
+		});
+	});
+
+	/*
+	* Для репозиториев GitHub
+	*/
+	app.get("/github/repositories",function(request,response){
+
+		/*fs.readFile('githubLogIn.html', 'utf8', function(err, html){
 			if (!err){
 			var dom = parser.parseFromString(html).rawHTML;
 			var changeName=dom.replace('<span id="username">','<span id="username">'+request.query.name);
@@ -57,6 +84,6 @@ module.exports = function(app){
 			//вывод сообщения о неверном логине/пароле
 			response.send(changeIcon);
 			}
-		});
+		});*/
 	});
 }
