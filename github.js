@@ -9,6 +9,8 @@ module.exports = function(app){
 	const urlencodedParser = bodyParser.urlencoded({extended: false});
 	var UserData=null;
 	var errorLog=false;
+	var UserLogin=null;
+	var UserPassword=null;
 	/*
 	* Для главной страницы GitHub
 	*/
@@ -33,7 +35,9 @@ module.exports = function(app){
 	    if(!request.body) return response.sendStatus(400);
 	    console.log(request.body);
 	    var login = `${request.body.login}`;
+	    UserLogin=login;
 	    var password=`${request.body.password}`;
+	    UserPassword=password;
 	    $.ajax({
 	    	type: 'GET',
 	    	url: 'https://api.github.com/user',
@@ -65,7 +69,6 @@ module.exports = function(app){
 			var dom = parser.parseFromString(html).rawHTML;
 			var changeName=dom.replace('<span id="username">','<span id="username">'+UserData.login);
 			var changeIcon=changeName.replace('img src=""','img src="'+UserData.avatar_url+'"');
-			//вывод сообщения о неверном логине/пароле
 			response.send(changeIcon);
 			}
 		});
@@ -75,15 +78,40 @@ module.exports = function(app){
 	* Для репозиториев GitHub
 	*/
 	app.get("/github/repositories",function(request,response){
-
-		/*fs.readFile('githubLogIn.html', 'utf8', function(err, html){
+		fs.readFile('githubLogIn.html', 'utf8', function(err, html){
 			if (!err){
 			var dom = parser.parseFromString(html).rawHTML;
-			var changeName=dom.replace('<span id="username">','<span id="username">'+request.query.name);
-			var changeIcon=changeName.replace('img src=""','img src="'+request.query.icon+'"');
-			//вывод сообщения о неверном логине/пароле
-			response.send(changeIcon);
+			var changeName=dom.replace('<span id="username">','<span id="username">'+UserData.login);
+			var changeIcon=changeName.replace('img src=""','img src="'+UserData.avatar_url+'"');
+			console.log(UserData.repos_url);
+			$.ajax({
+	    	type: 'GET',
+	    	url: UserData.repos_url,
+	    	headers:{
+	    		'Authorization': "Basic "+btoa(UserLogin+":"+UserPassword)
+	    	},
+	    	proccessData: false,
+	    	success: function(data){
+	    		console.log('Успех');
+	    		console.log("Логин: "+UserLogin);
+	    		console.log("Пароль: "+UserPassword);
+	    		console.log("Список репозиториев");
+	    		//console.log(data);
+	    		repos='';
+	    		for (var i=0;i<data.length;i++)
+	    			repos += '<span class=\"name\">'+data[i].name+' </span><span class=\"descriprion\">'+data[i].descriprion+'</span><p></p>\n';
+	    		changeIcon=changeIcon.replace('<div class=\"hello\">','<div class=\"repos\">\n'+repos).replace('<span>Выберите нужный раздел</span>','').replace('<title>GitHub','<title>Репозитории');		
+	    		response.send(changeIcon);
+	    	},
+	    	error: function(error){
+	    		//обработка неверного ввода
+	    		console.log(error);
+	    		errorLog=true;
+	    		response.redirect("/githubLogIn");
+	    	}
+	    });
+			
 			}
-		});*/
+		});
 	});
 }

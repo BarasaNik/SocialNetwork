@@ -59,7 +59,7 @@ h1{
 	position: absolute;
 }
 
-.hello{
+.hello, .repos{
 	margin-left: -15%;
 	margin-top: 25%;
 }
