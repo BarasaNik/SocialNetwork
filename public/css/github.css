@@ -83,6 +83,11 @@ table,th,td{
 	font-size: 24px;
 	border: 1px solid black;
 }
+
+td a{
+	color: #fff;
+}
+
 table{
 	width: 80%;
 }
