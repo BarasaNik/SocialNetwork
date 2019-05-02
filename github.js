@@ -97,7 +97,7 @@ module.exports = function(app){
 		    		console.log("Пароль: "+UserPassword);
 		    		console.log("Список репозиториев");
 		    		console.log(data);
-		    		repos='<table>\n\t<tr>\n\t\t<th>Название репозитория</th>\n\t\t<th>Описание</th>\n\t</tr>';
+		    		var repos='<table>\n\t<tr>\n\t\t<th>Название репозитория</th>\n\t\t<th>Описание</th>\n\t</tr>';
 		    		for (var i=0;i<data.length;i++){
 		    			repos+='<tr>'
 		    			var description='';
@@ -142,7 +142,7 @@ module.exports = function(app){
 		    		console.log("Пароль: "+UserPassword);
 		    		console.log("Список проектов");
 		    		console.log(data);
-		    		repos='<table>\n\t<tr>\n\t\t<th>Название проекта</th>\n\t\t<th>Описание</th>\n\t</tr>';
+		    		var repos='<table>\n\t<tr>\n\t\t<th>Название проекта</th>\n\t\t<th>Описание</th>\n\t</tr>';
 		    		for (var i=0;i<data.length;i++){
 		    			repos+='<tr>'
 		    			var description='';
@@ -186,7 +186,7 @@ module.exports = function(app){
 		    		console.log("Пароль: "+UserPassword);
 		    		console.log("Список проектов");
 		    		console.log(data);
-		    		repos='<table>\n\t<tr>\n\t\t<th>Имя</th>\n\t\t<th>Ссылка на профиль</th>\n\t</tr>';
+		    		var repos='<table>\n\t<tr>\n\t\t<th>Имя</th>\n\t\t<th>Ссылка на профиль</th>\n\t</tr>';
 		    		for (var i=0;i<data.length;i++){
 		    			repos+='<tr>'
 						repos += '<td>'+data[i].login+'<img src="'+data[i].avatar_url+'" width="40px" height="40px"></td><td><a href=\"'+data[i].html_url+'\">'+data[i].html_url+'</a></td>\n';	
