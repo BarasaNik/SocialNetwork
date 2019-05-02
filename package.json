@@ -4,11 +4,12 @@
   "description": "socialnetworks",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {},
   "scripts": {
-    "start":"node index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

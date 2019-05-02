@@ -59,7 +59,7 @@ h1{
 	position: absolute;
 }
 
-.hello{
+.hello, .repos{
 	margin-left: -15%;
 	margin-top: 25%;
 }
@@ -72,4 +72,8 @@ h1{
 
 .exitbutton{
 	margin-left: 0%;
+}
+
+.repos span{
+	
 }
