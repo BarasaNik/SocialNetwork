@@ -45,7 +45,7 @@ h1{
 .content .secondHeader{
 	margin-left: -70%;
 	margin-top: -4%;
-	font-size: 26px;
+	font-size: 24px;
 }
 
 .content .secondHeader a{
@@ -59,9 +59,14 @@ h1{
 	position: absolute;
 }
 
-.hello{
+.hello, .repos{
 	margin-left: -15%;
 	margin-top: 25%;
+}
+
+.repos{
+	margin-left: -55%;
+	margin-top: 5%;
 }
 
 .error{
@@ -72,4 +77,16 @@ h1{
 
 .exitbutton{
 	margin-left: 0%;
+}
+
+table,th,td{
+	font-size: 24px;
+	border: 1px solid black;
+}
+table{
+	width: 80%;
+}
+th{
+	width: 40%;
+	text-align: center;
 }

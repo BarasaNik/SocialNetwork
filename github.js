@@ -7,12 +7,17 @@ module.exports = function(app){
 	$ = require('jquery')(new jsdom.JSDOM().window);
 	const bodyParser = require("body-parser");
 	const urlencodedParser = bodyParser.urlencoded({extended: false});
-	
+	var UserData=null;
+	var errorLog=false;
+	var UserLogin=null;
+	var UserPassword=null;
+	/*
+	* Для главной страницы GitHub
+	*/
 	app.get("/github",function(request,response){
-		if(request.query.mes==undefined) 
+		if(errorLog==false) 
 			response.sendFile(__dirname+"/github.html");
 		else{
-			console.log(request.query.mes);
 			fs.readFile('github.html', 'utf8', function(err, html){
 			  if (!err){
 			    var dom = parser.parseFromString(html).rawHTML;
@@ -23,11 +28,16 @@ module.exports = function(app){
 		}
 	});
 
+	/*
+	* Для главной страницы GitHub
+	*/
 	app.post("/github", urlencodedParser, function (request, response) {
 	    if(!request.body) return response.sendStatus(400);
 	    console.log(request.body);
 	    var login = `${request.body.login}`;
+	    UserLogin=login;
 	    var password=`${request.body.password}`;
+	    UserPassword=password;
 	    $.ajax({
 	    	type: 'GET',
 	    	url: 'https://api.github.com/user',
@@ -36,26 +46,75 @@ module.exports = function(app){
 	    	},
 	    	proccessData: false,
 	    	success: function(data){
+	    		UserData=data;
 	    		console.log("Успех");
 	    		console.log(data);
-	    		response.redirect("/githubLogIn?name="+data.login+"&icon="+data.avatar_url);
+	    		response.redirect("/githubLogIn");
 	    	},
 	    	error: function(error){
 	    		//обработка неверного ввода
 	    		console.log(error);
-	    		response.redirect("/github?mes='Неверный логин/пароль'");
+	    		errorLog=true;
+	    		response.redirect("/github");
 	    	}
 	    });
 	});
 
+	/*
+	* Для страницы авторизации GitHub
+	*/
 	app.get("/githubLogIn",function(request,response){
 		fs.readFile('githubLogIn.html', 'utf8', function(err, html){
 			if (!err){
 			var dom = parser.parseFromString(html).rawHTML;
-			var changeName=dom.replace('<span id="username">','<span id="username">'+request.query.name);
-			var changeIcon=changeName.replace('img src=""','img src="'+request.query.icon+'"');
-			//вывод сообщения о неверном логине/пароле
+			var changeName=dom.replace('<span id="username">','<span id="username">'+UserData.login);
+			var changeIcon=changeName.replace('img src=""','img src="'+UserData.avatar_url+'"');
 			response.send(changeIcon);
+			}
+		});
+	});
+
+	/*
+	* Для репозиториев GitHub
+	*/
+	app.get("/github/repositories",function(request,response){
+		fs.readFile('githubLogIn.html', 'utf8', function(err, html){
+			if (!err){
+			var dom = parser.parseFromString(html).rawHTML;
+			var changeName=dom.replace('<span id="username">','<span id="username">'+UserData.login);
+			var changeIcon=changeName.replace('img src=""','img src="'+UserData.avatar_url+'"');
+			console.log(UserData.repos_url);
+			$.ajax({
+		    	type: 'GET',
+		    	url: UserData.repos_url,
+		    	headers:{
+		    		'Authorization': "Basic "+btoa(UserLogin+":"+UserPassword)
+		    	},
+		    	proccessData: false,
+		    	success: function(data){
+		    		console.log('Успех');
+		    		console.log("Логин: "+UserLogin);
+		    		console.log("Пароль: "+UserPassword);
+		    		console.log("Список репозиториев");
+		    		console.log(data);
+		    		repos='<table>\n\t<tr>\n\t\t<th>Название репозитория</th>\n\t\t<th>Описание</th>\n\t</tr>';
+		    		for (var i=0;i<data.length;i++){
+		    			repos+='<tr>'
+		    			var description='';
+		    			if (data[i].description!=null)
+					    	description=data[i].description;
+						repos += '<td>'+data[i].name+' </td><td>'+description+'</td>\n';	
+		    		}
+		    		changeIcon=changeIcon.replace('<div class=\"hello\">','<div class=\"repos\">\n'+repos).replace('<span>Выберите нужный раздел</span>','').replace('<title>GitHub','<title>Репозитории');		
+		    		response.send(changeIcon);
+		    	},
+		    	error: function(error){
+		    		//обработка неверного ввода
+		    		console.log(error);
+		    		errorLog=true;
+		    		response.redirect("/githubLogIn");
+		    	}
+	   		});
 			}
 		});
 	});

@@ -1,10 +1,12 @@
 const { SHA3 } = require('sha3');
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require('path');
+const publicPath = path.join(__dirname, '/public');
 const app = express();
 const hash1 = new SHA3(512);
 const hash2 = new SHA3(512);
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(publicPath));
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 //открытие страницы index.html
