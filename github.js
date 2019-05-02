@@ -105,7 +105,52 @@ module.exports = function(app){
 					    	description=data[i].description;
 						repos += '<td>'+data[i].name+' </td><td>'+description+'</td>\n';	
 		    		}
-		    		changeIcon=changeIcon.replace('<div class=\"hello\">','<div class=\"repos\">\n'+repos).replace('<span>Выберите нужный раздел</span>','').replace('<title>GitHub','<title>Репозитории');		
+		    		changeIcon=changeIcon.replace('<div class=\"hello\">','<div class=\"repos\">\n'+repos).replace('<span>Выберите нужный раздел</span>','');		
+		    		response.send(changeIcon);
+		    	},
+		    	error: function(error){
+		    		//обработка неверного ввода
+		    		console.log(error);
+		    		errorLog=true;
+		    		response.redirect("/githubLogIn");
+		    	}
+	   		});
+			}
+		});
+	});
+
+	/*
+	* Для проектов GitHub
+	*/
+	app.get("/github/stars",function(request,response){
+		fs.readFile('githubLogIn.html', 'utf8', function(err, html){
+			if (!err){
+			var dom = parser.parseFromString(html).rawHTML;
+			var changeName=dom.replace('<span id="username">','<span id="username">'+UserData.login);
+			var changeIcon=changeName.replace('img src=""','img src="'+UserData.avatar_url+'"');
+			console.log(UserData.starred_url);
+			$.ajax({
+		    	type: 'GET',
+		    	url: UserData.starred_url.replace('{/owner}','').replace('{/repo}',''),
+		    	headers:{
+		    		'Authorization': "Basic "+btoa(UserLogin+":"+UserPassword)
+		    	},
+		    	proccessData: false,
+		    	success: function(data){
+		    		console.log('Успех');
+		    		console.log("Логин: "+UserLogin);
+		    		console.log("Пароль: "+UserPassword);
+		    		console.log("Список проектов");
+		    		console.log(data);
+		    		repos='<table>\n\t<tr>\n\t\t<th>Название проекта</th>\n\t\t<th>Описание</th>\n\t</tr>';
+		    		for (var i=0;i<data.length;i++){
+		    			repos+='<tr>'
+		    			var description='';
+		    			if (data[i].description!=null)
+					    	description=data[i].description;
+						repos += '<td>'+data[i].name+' </td><td>'+description+'</td>\n';	
+		    		}
+		    		changeIcon=changeIcon.replace('<div class=\"hello\">','<div class=\"repos\">\n'+repos).replace('<span>Выберите нужный раздел</span>','');		
 		    		response.send(changeIcon);
 		    	},
 		    	error: function(error){
