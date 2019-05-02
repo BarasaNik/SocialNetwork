@@ -1,65 +1,65 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>Одноклассники</title>
-    <!-- Подклчение таблицы стилей для header !-->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- Подклчение таблицы стилей для авторизации в одноклассниках !-->
-    <link rel="stylesheet" type="text/css" href="css/odnoclass.css">
-    <!-- Подключение стилей обнуляющих во всех браузерах стандартные настройки !-->
-    <link rel="stylesheet" type="text/css" href="css/nullStyle.css">
-    <!-- Кодировка страниц !-->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- Иконка на вкладке !-->
-    <link rel="shortcut icon" href="images/ok_sighn.png" type="image/x-icon">
+<!DOCTYPE html>
+<!-- saved from url=(0406)https://connect.ok.ru/dk?st.cmd=OAuth2Login&st.layout=w&st.redirect=%252Fdk%253Fst.cmd%253DOAuth2Permissions%2526amp%253Bst.layout%253Dw%2526amp%253Bst.scope%253DVALUABLE_ACCESS%2526amp%253Bst.response_type%253Dcode%2526amp%253Bst.show_permissions%253Doff%2526amp%253Bst.redirect_uri%253Dhttp%25253A%25252F%25252Flocalhost%25253A3000%25252Fvk%2526amp%253Bst.client_id%253D1278141696&st.client_id=1278141696 -->
+<html class="">
+    <head>
+        <title>Одноклассники</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Подклчение таблицы стилей для header !-->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!-- Подклчение таблицы стилей для авторизации в одноклассниках !-->
+        <link rel="stylesheet" type="text/css" href="css/odnoclass.css">
+        <!-- Подключение стилей обнуляющих во всех браузерах стандартные настройки !-->
+        <link rel="stylesheet" type="text/css" href="css/nullStyle.css">
+        <!-- Кодировка страниц !-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <!-- Иконка на вкладке !-->
+        <link rel="shortcut icon" href="images/ok_sighn.png" type="image/x-icon">
 
-</head>
-<body>
-<!-- Хедер !-->
-    <div class="header">
-    	<span>Социальные сети</span>
-        <div class="social aiming-vk-link" ><a href="/vk">Вконтакте</a></div>      
-        <div class="social aiming-instagram-link"><a href="/instagram">Instagram</a></div>
-        <div class ="social aiming-odnoclass-link"> <a href="/odnoclassniki">Одноклассники</a> </div>
-    	<div class="social aiming-facebook-link"><a href="/facebook">Facebook</a></div>
-        <div class="social aiming-github-link"><a href="/github">GitHub</a></div>
-    	<a href="/enter" class="social">Выход</a>
-    </div>
-
-<div class="auth-block">
-    <div class="auth-window">
-        <div class="string-up-input-login">
-            Логин, адрес почты или телефон
+        <!-- Хедер !-->
+       <div class="header">
+            <span>Социальные сети</span>
+            <div class="social aiming-vk-link" ><a href="/vk">Вконтакте</a></div>      
+            <div class="social aiming-instagram-link"><a href="/instagram">Instagram</a></div>
+            <div class ="social aiming-odnoclass-link"> <a href="/odnoclassniki">Одноклассники</a> </div>
+            <div class="social aiming-facebook-link"><a href="/facebook">Facebook</a></div>
+            <div class="social aiming-github-link"><a href="/github">GitHub</a></div>
+            <a href="/enter" class="social">Выход</a>
         </div>
-
-        <div class = "input-log-parol-block">
-            <input class="form-input" type="text">
+    </head>
+    <body>
+        <div id="hook_Block_OAuth2Login" class="hookBlock">
+            <form method="post" action="https://connect.ok.ru/dk?cmd=OAuth2Login&amp;st.cmd=OAuth2Login&amp;st.layout=w&amp;st.redirect=%252Fdk%253Fst.cmd%253DOAuth2Permissions%2526amp%253Bst.layout%253Dw%2526amp%253Bst.scope%253DVALUABLE_ACCESS%2526amp%253Bst.response_type%253Dcode%2526amp%253Bst.show_permissions%253Doff%2526amp%253Bst.redirect_uri%253Dhttp%25253A%25252F%25252Flocalhost%25253A3000%25252Fvk%2526amp%253Bst.client_id%253D1278141696&amp;st._hi=239&amp;st.client_id=1278141696">
+                <div class="auth-block">
+                    <input name="fr.posted" type="hidden" value="set">
+                    <div class="auth-window">
+                        <div class="string-up-input-login">
+                            Логин, адрес почты или телефон
+                        </div>
+                        <div class="input-log-parol-block">
+                            <input tabindex="1" name="fr.email" id="field_email" type="text" value="" class="form-input">
+                        </div>
+                        <div class="string-up-input-password">
+                            Пароль
+                        </div>
+                        <div class="input-log-parol-block">
+                            <input tabindex="2" name="fr.password" id="field_password" type="password" class="form-input">
+                        </div>
+                        <div class="auth-sumbit-block">
+                            <input value="Войти" onclick="this.className +=&#39; __disabled&#39;" tabindex="3" type="submit" class="enter-button">
+                        </div>
+                            <a href="https://ok.ru/password/recovery"  class="forget-password" target="_blank">Забыли пароль?<a>
+                        </span>
+                        <div class="image-no-profil">
+                                <img alt="Нет профиля в одноклассниках" src="images/StrNoProfil.png">
+                        </div>
+                        <div class="auth-registration-block">
+                                <a href="https://ok.ru/dk?st.cmd=anonymRegistrationEnterPhone" target="_blank">
+                                    <input class="registration-button" type="button" value="Регистрация">
+                                </a>
+                        </div>
+                    </div>   
+                </div>
+            </form>
         </div>
-
-        <div class="string-up-input-password">
-            Пароль
-        </div>
-
-        <div class = "input-log-parol-block">
-            <input class="form-input" type="password">
-        </div>
-
-        <div class="auth-sumbit-block">
-            <a href= "#">
-                <input class="enter-button" type="button" value="Войти">
-            </a>
-        </div>
-
-        <div class="image-no-profil">
-            <img alt="Нет профиля в одноклассниках" src="images/StrNoProfil.png">
-        </div>
-
-        <div class="auth-registration-block">
-            <a href= "#">
-                <input class="registration-button" type="button" value="Регистрация">
-            </a>
-        </div>
-    </div>
-</div>
-</body>
+    </body>
 </html>
