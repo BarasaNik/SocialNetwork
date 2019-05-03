@@ -46,4 +46,4 @@ require('./odnoclassniki.js')(app);
 require('./instagram.js')(app);  
 require('./vk.js')(app);  
 
-app.listen(3000);
+app.listen(8080);
