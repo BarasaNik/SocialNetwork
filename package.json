@@ -12,7 +12,11 @@
     "jquery":"^3.4.0",
     "jQuery":"^1.7.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "dom-parser":"^0.1.6",
+    "jquery":"^3.4.0",
+    "jQuery":"^1.7.4"
+  },
   "scripts": {
     "start": "node index.js"
   },
