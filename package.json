@@ -7,7 +7,8 @@
     "express": "^4.16.4",
     "sha3":"^2.0.2",
     "jsdom":"^14.0.0",
-    "btoa":"^1.2.1"
+    "btoa":"^1.2.1",
+    "dom-parser":"^0.1.6"
   },
   "devDependencies": {},
   "scripts": {
