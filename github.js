@@ -204,4 +204,46 @@ module.exports = function(app){
 			}
 		});
 	});
+
+	/*
+	* Для подписчиков GitHub
+	*/
+	app.get("/github/followers",function(request,response){
+		fs.readFile('githubLogIn.html', 'utf8', function(err, html){
+			if (!err){
+			var dom = parser.parseFromString(html).rawHTML;
+			var changeName=dom.replace('<span id="username">','<span id="username">'+UserData.login);
+			var changeIcon=changeName.replace('img src=""','img src="'+UserData.avatar_url+'"');
+			console.log(UserData.following_url);
+			$.ajax({
+		    	type: 'GET',
+		    	url: UserData.followers_url.replace('{/other_user}',''),
+		    	headers:{
+		    		'Authorization': "Basic "+btoa(UserLogin+":"+UserPassword)
+		    	},
+		    	proccessData: false,
+		    	success: function(data){
+		    		console.log('Успех');
+		    		console.log("Логин: "+UserLogin);
+		    		console.log("Пароль: "+UserPassword);
+		    		console.log("Список проектов");
+		    		console.log(data);
+		    		var repos='<table>\n\t<tr>\n\t\t<th>Имя</th>\n\t\t<th>Ссылка на профиль</th>\n\t</tr>';
+		    		for (var i=0;i<data.length;i++){
+		    			repos+='<tr>'
+						repos += '<td>'+data[i].login+'<img src="'+data[i].avatar_url+'" width="40px" height="40px"></td><td><a href=\"'+data[i].html_url+'\">'+data[i].html_url+'</a></td>\n';	
+		    		}
+		    		changeIcon=changeIcon.replace('<div class=\"hello\">','<div class=\"repos\">\n'+repos).replace('<span>Выберите нужный раздел</span>','');		
+		    		response.send(changeIcon);
+		    	},
+		    	error: function(error){
+		    		//обработка неверного ввода
+		    		console.log(error);
+		    		errorLog=true;
+		    		response.redirect("/githubLogIn");
+		    	}
+	   		});
+			}
+		});
+	});
 }
