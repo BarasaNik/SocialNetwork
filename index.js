@@ -6,6 +6,7 @@ const publicPath = path.join(__dirname, '/public');
 const app = express();
 const hash1 = new SHA3(512);
 const hash2 = new SHA3(512);
+
 app.use(express.static(publicPath));
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = bodyParser.urlencoded({extended: false});

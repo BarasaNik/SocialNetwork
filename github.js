@@ -103,7 +103,7 @@ module.exports = function(app){
 		    			var description='';
 		    			if (data[i].description!=null)
 					    	description=data[i].description;
-						repos += '<td>'+data[i].name+' </td><td>'+description+'</td>\n';	
+						repos += '<td><a href= \"'+data[i].html_url+'\">'+data[i].name+' </a></td><td>'+description+'</td>\n';	
 		    		}
 		    		changeIcon=changeIcon.replace('<div class=\"hello\">','<div class=\"repos\">\n'+repos).replace('<span>Выберите нужный раздел</span>','');		
 		    		response.send(changeIcon);
