@@ -7,6 +7,8 @@ const app = express();
 const hash1 = new SHA3(512);
 const hash2 = new SHA3(512);
 
+var port = process.env.PORT || 3000;
+
 app.use(express.static(publicPath));
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = bodyParser.urlencoded({extended: false});
@@ -46,4 +48,6 @@ require('./odnoclassniki.js')(app);
 require('./instagram.js')(app);  
 require('./vk.js')(app);  
 
-app.listen(8080);
+app.listen(port, function () {
+ console.log(`Example app listening on port !`);
+});
