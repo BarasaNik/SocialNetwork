@@ -4,7 +4,8 @@
   "description": "socialnetworks",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "sha3":"^2.0.2"
   },
   "devDependencies": {},
   "scripts": {
