@@ -1,3 +1,4 @@
+Авторизация на главной странице приложения логин/пароль: admin/admin
 Работа с Node.js:
   1. Склонировать себе проект, либо выполнить git pull на master ветке
   2. Установить node.js, если еще не установлен https://htmlacademy.ru/blog/87-installing-nodejs
