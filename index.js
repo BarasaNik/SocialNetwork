@@ -30,7 +30,7 @@ app.post("/enter", urlencodedParser, function (request, response) {
 	const MongoClient = require("mongodb").MongoClient;
 	const url = process.env.MONGO_URL || 'mongodb://localhost:27017/'
 	const mongoClient = new MongoClient(url, { useNewUrlParser: true });
-	 
+	
 	mongoClient.connect(function(err, client){
 	    hash1.reset();
 		hash2.reset();  
@@ -41,7 +41,7 @@ app.post("/enter", urlencodedParser, function (request, response) {
 		        console.log(results);
 		        if (results.length>0){
 		        	console.log('Успешно');
-					client.close()
+					client.close();
 					response.redirect("/main");
 		        } else{
 					console.log('Упс');
@@ -75,7 +75,7 @@ app.post("/enter", urlencodedParser, function (request, response) {
 							if (!err){
 							    var dom = parser.parseFromString(html).rawHTML;
 					        	console.log('Ошибка');
-								client.close()
+								client.close();
 								response.send(dom.replace('<input type="submit"','\n<div class=\"error\">Такой логин занят</div>\n<input type="submit"'));
 						  	}
 						});
