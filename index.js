@@ -7,7 +7,10 @@ const app = express();
 const hash1 = new SHA3(512);
 const hash2 = new SHA3(512);
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3000,
+	DomParser = require('dom-parser'),
+	parser = new DomParser(),
+	fs = require('fs');
 
 app.use(express.static(publicPath));
 // создаем парсер для данных application/x-www-form-urlencoded
@@ -23,15 +26,43 @@ app.post("/enter", urlencodedParser, function (request, response) {
 	//высчитываем хэш введенного пароля
 	hash1.update(`${request.body.password}`);
 	console.log(hash1.digest('hex'));
+	
+	const MongoClient = require("mongodb").MongoClient;
+	const url = "mongodb://localhost:27017/";
+	const mongoClient = new MongoClient(url, { useNewUrlParser: true });
+	 
+	mongoClient.connect(function(err, client){
+	      
+	    const db = client.db("User");
+	    const collection = db.collection("user");
+	     
+	    collection.find({$and: [{login:`${request.body.login}`},{"password":`${request.body.password}`}]}).toArray(function(err, results){
+	        console.log(results);
+	        if (results.length>0){
+	        	console.log('Успешно');
+				client.close()
+				response.redirect("/main");
+	        } else{
+				console.log('Упс');
+	    		client.close();
+	    		fs.readFile('index.html', 'utf8', function(err, html){
+				  if (!err){
+				    var dom = parser.parseFromString(html).rawHTML;
+				    //вывод сообщения о неверном логине/пароле
+				    response.send(dom.replace('<input type="submit"','\n<div class=\"error\">Неверный логин/пароль</div>\n<input type="submit"'));
+				  }
+				});
+	        }
+	    });
+	});
 	//сравниваем хэш с хэшом пароля admin
-	if (`${request.body.login}`=='admin' && hash1.digest('hex')==hash2.update('admin').digest('hex')){
-		console.log('Успешно');
-		response.redirect("/main");
+	/*if (`${request.body.login}`==='admin' && hash1.digest('hex')===hash2.update('admin').digest('hex')){
+		
 	}
 	else {
-		console.log('Упс');
-		response.sendFile(__dirname + "/index.html");
-	}
+		
+		
+	}*/
 	hash1.reset();
 	hash2.reset();
 });
@@ -46,8 +77,8 @@ require('./github.js')(app);
 require('./facebook.js')(app);  
 require('./odnoclassniki.js')(app);  
 require('./instagram.js')(app);  
-require('./vk.js')(app);  
+require('./vk.js')(app);
 
 app.listen(port, function () {
- console.log(`Example app listening on port !`);
+ console.log(`Example app listening on port `+port+` !`);
 });
