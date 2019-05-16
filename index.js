@@ -22,9 +22,9 @@ app.get("/enter",function(request,response){
 app.post("/enter", urlencodedParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
     console.log(request.body);
+    var userLogin = `${request.body.login}`;
+    var userPassword = hash1.update(`${request.body.password}`).digest('hex');
 	//проверяем правильность введенных данных
-	//высчитываем хэш введенного пароля
-	hash1.update(`${request.body.password}`);
 	console.log(hash1.digest('hex'));
 	
 	const MongoClient = require("mongodb").MongoClient;
@@ -32,39 +32,74 @@ app.post("/enter", urlencodedParser, function (request, response) {
 	const mongoClient = new MongoClient(url, { useNewUrlParser: true });
 	 
 	mongoClient.connect(function(err, client){
-	      
+	    hash1.reset();
+		hash2.reset();  
 	    const db = client.db("User");
 	    const collection = db.collection("user");
-	     
-	    collection.find({$and: [{login:`${request.body.login}`},{"password":`${request.body.password}`}]}).toArray(function(err, results){
-	        console.log(results);
-	        if (results.length>0){
-	        	console.log('Успешно');
-				client.close()
-				response.redirect("/main");
-	        } else{
-				console.log('Упс');
-	    		client.close();
-	    		fs.readFile('index.html', 'utf8', function(err, html){
-				  if (!err){
-				    var dom = parser.parseFromString(html).rawHTML;
-				    //вывод сообщения о неверном логине/пароле
-				    response.send(dom.replace('<input type="submit"','\n<div class=\"error\">Неверный логин/пароль</div>\n<input type="submit"'));
-				  }
+	    if (request.body.enter){ 
+		    collection.find({$and: [{login:userLogin},{"password":userPassword}]}).toArray(function(err, results){
+		        console.log(results);
+		        if (results.length>0){
+		        	console.log('Успешно');
+					client.close()
+					response.redirect("/main");
+		        } else{
+					console.log('Упс');
+		    		client.close();
+		    		fs.readFile('index.html', 'utf8', function(err, html){
+					  if (!err){
+					    var dom = parser.parseFromString(html).rawHTML;
+					    //вывод сообщения о неверном логине/пароле
+					    response.send(dom.replace('<input type="submit"','\n<div class=\"error\">Неверный логин/пароль</div>\n<input type="submit"'));
+					  }
+					});
+		        }
+		    });
+		}
+		else {
+			if (userLogin.length==0 || `${request.body.password}`.length==0){
+			 	fs.readFile('index.html', 'utf8', function(err, html){
+					  if (!err){
+					    var dom = parser.parseFromString(html).rawHTML;
+					    client.close();
+					    //вывод сообщения о неверном логине/пароле
+					    response.send(dom.replace('<input type="submit"','\n<div class=\"error\">Поля должны быть заполнены</div>\n<input type="submit"'));
+					  }
 				});
-	        }
-	    });
+			}
+			else{
+				collection.find({$and: [{login:userLogin}]}).toArray(function(err, results){
+			        console.log(results);
+			        if (results.length>0){
+						fs.readFile('index.html', 'utf8', function(err, html){
+							if (!err){
+							    var dom = parser.parseFromString(html).rawHTML;
+					        	console.log('Ошибка');
+								client.close()
+								response.send(dom.replace('<input type="submit"','\n<div class=\"error\">Такой логин занят</div>\n<input type="submit"'));
+						  	}
+						});
+			        	
+			        } else{
+						console.log('Успешно');
+			    		var users=[{login:`${request.body.login}`,"password":hash1.update(`${request.body.password}`).digest('hex')}];
+						collection.insertMany(users, function(err, results){
+					       console.log(results);
+					       client.close();
+					       fs.readFile('index.html', 'utf8', function(err, html){
+								if (!err){
+							    var dom = parser.parseFromString(html).rawHTML;
+							    //вывод сообщения о неверном логине/пароле
+							    response.send(dom.replace('<input type="submit"','\n<div class=\"ok\">Вы успешно зарегистрированы</div>\n<input type="submit"'));
+							  }
+							});
+					    });
+					}
+				});
+				
+			}
+		}
 	});
-	//сравниваем хэш с хэшом пароля admin
-	/*if (`${request.body.login}`==='admin' && hash1.digest('hex')===hash2.update('admin').digest('hex')){
-		
-	}
-	else {
-		
-		
-	}*/
-	hash1.reset();
-	hash2.reset();
 });
   
 app.get("/", function(request, response){
