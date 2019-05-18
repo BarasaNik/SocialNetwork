@@ -7,6 +7,8 @@ const app = express();
 const hash1 = new SHA3(512);
 const hash2 = new SHA3(512);
 
+//TODO Вынести методы для работы с базой данных в отдельный модуль
+
 var port = process.env.PORT || 3000,
     DomParser = require('dom-parser'),
     parser = new DomParser(),
@@ -29,7 +31,7 @@ app.post("/enter", urlencodedParser, function(request, response) {
     console.log(hash1.digest('hex'));
 
     const MongoClient = require("mongodb").MongoClient;
-    const url = process.env.MONGO_URL || 'mongodb://localhost:27017/'
+    const url = process.env.MONGO_URL || 'mongodb://localhost:27017/';
     const mongoClient = new MongoClient(url, { useNewUrlParser: true });
 
     mongoClient.connect(function(err, client) {
@@ -57,6 +59,7 @@ app.post("/enter", urlencodedParser, function(request, response) {
                 }
             });
         } else {
+            //TODO изменить валидацию
             /*Валидация введенных паролей*/
             if (userLogin.length == 0 || `${request.body.password}`.length == 0) {
                 fs.readFile('index.html', 'utf8', function(err, html) {
