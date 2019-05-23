@@ -12,10 +12,6 @@ module.exports = function(app) {
     const hash2 = new SHA3(512);
     const hash3 = new SHA3(512);
 
-    /*const MongoClient = require("mongodb").MongoClient;
-    const url = process.env.MONGO_URL || 'mongodb://localhost:27017/'
-    const mongoClient = new MongoClient(url, { useNewUrlParser: true });*/
-
     const DataBase = require("./database");
 
     app.get("/main", function(request, response) {
