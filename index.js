@@ -7,6 +7,9 @@ const app = express();
 const hash1 = new SHA3(512);
 const DataBase = require("./database");
 
+// создаем парсер для данных application/x-www-form-urlencoded
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 //TODO Вынести методы для работы с базой данных в отдельный модуль
 
 var port = process.env.PORT || 3000,
@@ -15,8 +18,8 @@ var port = process.env.PORT || 3000,
     fs = require('fs');
 
 app.use(express.static(publicPath));
-// создаем парсер для данных application/x-www-form-urlencoded
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+
 //открытие страницы index.html
 app.get("/enter", function(request, response) {
     response.sendFile(__dirname + "/index.html");
@@ -28,8 +31,6 @@ app.post("/enter", urlencodedParser, function(request, response) {
     hash1.reset();
     var userLogin = `${request.body.login}`;
     var userPassword = hash1.update(`${request.body.password}`).digest('hex');
-    //проверяем правильность введенных данных
-    console.log(hash1.digest('hex'));
 
     var dataBase = new DataBase();
 
@@ -38,8 +39,8 @@ app.post("/enter", urlencodedParser, function(request, response) {
         const db = client.db("User");
         const collection = db.collection("user");
         if (request.body.enter) {
-            var resPromise = dataBase.findUserByLogAndPass(collection, userLogin, userPassword);
-            resPromise.then(function(result) {
+            var logPromise = dataBase.findUserByLogAndPass(collection, userLogin, userPassword);
+            logPromise.then(function(result) {
                 console.log('Результат ' + result);
                 if (result.length > 0) {
                     console.log('Успешно');
@@ -77,8 +78,8 @@ app.post("/enter", urlencodedParser, function(request, response) {
                     }
                 });
             } else {
-                var resPromise = dataBase.findUserByLog(collection, userLogin, userPassword);
-                resPromise.then(function(result) {
+                var regPromise = dataBase.findUserByLog(collection, userLogin, userPassword);
+                regPromise.then(function(result) {
                     console.log(result);
                     if (result.length > 0) {
                         fs.readFile('index.html', 'utf8', function(err, html) {
@@ -92,13 +93,21 @@ app.post("/enter", urlencodedParser, function(request, response) {
                     } else {
                         console.log('Успешно');
                         var users = [{ login: `${request.body.login}`, "password": hash1.update(`${request.body.password}`).digest('hex') }];
-                        collection.insertMany(users, function(err, results) {
-                            console.log(results);
-                            client.close();
+                        var insPromise = dataBase.insertNewUser(collection, users);
+                        insPromise.then(function(result) {
                             fs.readFile('index.html', 'utf8', function(err, html) {
                                 if (!err) {
                                     var dom = parser.parseFromString(html).rawHTML;
                                     response.send(dom.replace('<input type="submit"', '\n<div class=\"ok\">Вы успешно зарегистрированы</div>\n<input type="submit"'));
+                                }
+                            });
+                        }, function(error) {
+                            fs.readFile('index.html', 'utf8', function(err, html) {
+                                if (!err) {
+                                    var dom = parser.parseFromString(html).rawHTML;
+                                    console.log('Ошибка');
+                                    client.close();
+                                    response.send(dom.replace('<input type="submit"', '\n<div class=\"error\">Такой логин занят</div>\n<input type="submit"'));
                                 }
                             });
                         });

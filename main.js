@@ -1,7 +1,6 @@
 module.exports = function(app) {
     const { SHA3 } = require('sha3');
     var jsdom = require('jsdom'),
-        btoa = require('btoa'),
         fs = require('fs'),
         DomParser = require('dom-parser'),
         parser = new DomParser();
@@ -44,6 +43,7 @@ module.exports = function(app) {
         var oldpassagain = hash2.update(`${request.body.oldpassagain}`).digest('hex');
         var newpass = hash3.update(`${request.body.newpass}`).digest('hex');
         console.log('userID ' + userId);
+
         mongoClient.connect(function(err, client) {
             const db = client.db("User");
             const collection = db.collection("user");
