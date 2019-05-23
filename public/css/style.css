@@ -25,6 +25,11 @@ body{
 	margin-bottom: 4%;
 }
 
+.change{
+	color: black;
+	margin-left: 90%;
+}
+
 #loginUser .error{
 	margin-left: 21%;
 }
@@ -49,7 +54,16 @@ body{
 	border-radius: 15%;
 }
 
-#loginUser p{
+#changePass{
+	margin-left: 40%;
+	margin-top: 5%;
+	width: 310px;
+	padding: 30px 50px 60px 50px;
+	border: 1px solid #212121;
+	border-radius: 15%;	
+}
+
+#loginUser p, #changePass p{
 	font-size: 27.5px;
 }
 
@@ -73,6 +87,11 @@ body{
 .hello{
 	margin-left: 15%;
 	margin-top: 15%;
+}
+
+.helloPas{
+	margin-left: 40%;
+	margin-top: 15%;	
 }
 
 .hello span{
