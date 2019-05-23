@@ -65,24 +65,6 @@ app.post("/enter", urlencodedParser, function(request, response) {
                     }
                 });
             });
-            /*collection.find({ $and: [{ login: userLogin }, { password: userPassword }] }).toArray(function(err, results) {
-                console.log(results);
-                if (results.length > 0) {
-                    console.log('Успешно');
-                    client.close();
-                    response.redirect("/main");
-                } else {
-                    console.log('Упс');
-                    client.close();
-                    fs.readFile('index.html', 'utf8', function(err, html) {
-                        if (!err) {
-                            var dom = parser.parseFromString(html).rawHTML;
-                            //вывод сообщения о неверном логине/пароле
-                            response.send(dom.replace('<input type="submit"', '\n<div class=\"error\">Неверный логин/пароль</div>\n<input type="submit"'));
-                        }
-                    });
-                }
-            });*/
         } else {
             /*Валидация введенных паролей*/
             if (userLogin.length == 0 || `${request.body.password}`.length == 0) {
@@ -95,9 +77,10 @@ app.post("/enter", urlencodedParser, function(request, response) {
                     }
                 });
             } else {
-                collection.find({ $and: [{ login: userLogin }] }).toArray(function(err, results) {
-                    console.log(results);
-                    if (results.length > 0) {
+                var resPromise = dataBase.findUserByLog(collection, userLogin, userPassword);
+                resPromise.then(function(result) {
+                    console.log(result);
+                    if (result.length > 0) {
                         fs.readFile('index.html', 'utf8', function(err, html) {
                             if (!err) {
                                 var dom = parser.parseFromString(html).rawHTML;
@@ -120,6 +103,15 @@ app.post("/enter", urlencodedParser, function(request, response) {
                             });
                         });
                     }
+                }, function(error) {
+                    fs.readFile('index.html', 'utf8', function(err, html) {
+                        if (!err) {
+                            var dom = parser.parseFromString(html).rawHTML;
+                            console.log('Ошибка');
+                            client.close();
+                            response.send(dom.replace('<input type="submit"', '\n<div class=\"error\">Такой логин занят</div>\n<input type="submit"'));
+                        }
+                    });
                 });
             }
         }

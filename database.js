@@ -11,11 +11,8 @@ class DataBase {
          * @returns список подходящих пльзователей
          */
     findUserByLogAndPass(collection, login, password) {
-            console.log('Начинаем');
             return new Promise(function(resolve, reject) {
-                console.log('Вычисляем значение');
                 collection.find({ $and: [{ login: login }, { password: password }] }).toArray(function(err, results) {
-                    console.log('Значение ' + results);
                     if (err != null)
                         reject(err);
                     else
@@ -28,13 +25,15 @@ class DataBase {
          * @param login искомый логин
          * @returns список подходящих пльзователей
          */
-    findByLog(collection, login) {
-        var finds = [];
-        collection.find({ $and: [{ login: login }] }).toArray(function(err, results) {
-            console.log('Результат ' + results);
-            finds = results;
+    findUserByLog(collection, login) {
+        return new Promise(function(resolve, reject) {
+            collection.find({ $and: [{ login: login }] }).toArray(function(err, results) {
+                if (err != null)
+                    reject(err);
+                else
+                    resolve(results);
+            });
         });
-        return finds;
     }
 }
 
