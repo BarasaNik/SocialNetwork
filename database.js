@@ -39,6 +39,22 @@ class DataBase {
         });
     }
 
+    /**
+     * Метод для поиска в базе данных пользователя с конкретным паролем
+     * @param password исходный пароль
+     * @returns список подходящих пльзователей
+     */
+    findUserByPass(collection, password) {
+        return new Promise(function(resolve, reject) {
+            collection.find({ $and: [{ password: password }] }).toArray(function(err, results) {
+                if (err != null)
+                    reject(err);
+                else
+                    resolve(results);
+            });
+        });
+    }
+
     insertNewUser(collection, users) {
         return new Promise(function(resolve, reject) {
             collection.insertMany(users, function(err, results) {
