@@ -55,6 +55,11 @@ class DataBase {
         });
     }
 
+    /**
+     * Метод для добавления в базу данных нового пользователя
+     * @param users пользователи
+     * @returns успех/неуспех
+     */
     insertNewUser(collection, users) {
         return new Promise(function(resolve, reject) {
             collection.insertMany(users, function(err, results) {
